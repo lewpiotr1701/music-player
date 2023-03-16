@@ -19,10 +19,15 @@ let songIdx = 2
 // Initially load song details into DOM
 loadSong(songs[songIdx])
 
+
 // Event listeners
 playBtn.addEventListener('click', () => {
   audio.paused ? playSong() : pauseSong()
 })
+
+previousBtn.addEventListener('click', previousSong)
+nextBtn.addEventListener('click', nextSong)
+
 
 // Update song details
 function loadSong(song) {
@@ -49,4 +54,30 @@ function pauseSong() {
   playBtn.querySelector('i.fas').classList.add('fa-play')
 
   audio.pause()
+}
+
+// Change to previous song
+function previousSong() {
+  songIdx--
+
+  if (songIdx < 0) {
+    songIdx = songs.length - 1
+  }
+
+  loadSong(songs[songIdx])
+
+  playSong()
+}
+
+// Change to next song
+function nextSong() {
+  songIdx++
+
+  if (songIdx > songs.length - 1) {
+    songIdx = 0
+  }
+
+  loadSong(songs[songIdx])
+
+  playSong()
 }
